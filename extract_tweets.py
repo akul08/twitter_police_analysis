@@ -30,7 +30,7 @@ def get_tweets(screen_name):
         api = tweepy.API(auth)
 
         t = api.user_timeline(
-            screen_name=screen_name, count=200, include_rts=False)
+            screen_name=screen_name, count=200, include_rts=False, exclude_replies=True)
 
     except Exception, e:
         print 'Authentication Failed\nError: ', e
@@ -49,7 +49,7 @@ def get_tweets(screen_name):
         last_id = tweets[-1].id - 1
         # Collect the tweets before the last_id
         t = api.user_timeline(screen_name=screen_name,
-                              count=200, include_rts=False, max_id=last_id)
+                              count=200, include_rts=False, max_id=last_id, exclude_replies=True)
         tweets.extend(t)
     print 'len of tweets = ', len(tweets)
 
@@ -62,5 +62,6 @@ def get_tweets(screen_name):
     collection.insert_many(tweets)
 
 
-for police_user in tweet_users:
-    get_tweets(police_user)
+# for police_user in tweet_users:
+    # get_tweets(police_user)
+get_tweets('DelhiPolice')
