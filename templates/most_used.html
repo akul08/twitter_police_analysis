@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Most used</title>
+</head>
+<body>
+    <table>
+        {% for k, v in most_used_hashtags_dict.items() %}
+        <tr>
+            <td>key: {{ k }}</td>
+            {% for k2 in v %}
+            <tr>
+                <td>{{ k2 }}</td>
+            </tr>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
