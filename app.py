@@ -68,6 +68,7 @@ def most_used_hashtags():
 @app.route('/most_engagement')
 def most_engagement():
     top_liked_tweets_dict = {}
+    highest_tweet_type = {}
     for police_handle in tweet_users:
 
         client = MongoClient('localhost', 27017)
@@ -91,16 +92,17 @@ def most_engagement():
 
         if tw[0]['media']:
             if tw[0]['content']:
-                top_liked_tweets['highest_tweet_type'] = 'image_text'
+                highest_tweet_type[police_handle] = 'image_text'
             else:
-                top_liked_tweets['highest_tweet_type'] = 'image'
+                highest_tweet_type[police_handle] = 'image'
         else:
-            top_liked_tweets['highest_tweet_type'] = 'text'
+            highest_tweet_type[police_handle] = 'text'
 
         top_liked_tweets_dict[police_handle] = top_liked_tweets
 
     return render_template('most_engagement.html',
-                           top_liked_tweets_dict=top_liked_tweets_dict)
+                           top_liked_tweets_dict=top_liked_tweets_dict,
+                           highest_tweet_type=highest_tweet_type)
 
 
 # in production Heroku will set the PORT environment variable.

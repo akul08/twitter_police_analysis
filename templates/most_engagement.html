@@ -4,22 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Most Engaged tweets</title>
+    <style>
+        .title {
+            text-align: center;
+
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .chart_div {
+            width: 33%; 
+            display: inline-block;
+        }
+        .chart_div p {
+            font-size: 12px;
+            text-align: center;
+            margin: 0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+            {% for name, tweets in top_liked_tweets_dict.items() %}
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topping');
+                data.addColumn('number', 'Slices');
+                data.addRows([
+                    {% for type_of_tweet,no_of_tweet in tweets.items() %}
+                        ['{{ type_of_tweet }}', {{no_of_tweet}}], 
+                    {% endfor %}
+                ]);
+
+                // Set chart options
+                var options = {
+                    'title': '{{ name }}',
+                    'is3D': true,
+                    'legend': 'bottom',
+                    'width': 400,
+                    'height': 250
+                };
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div_' + '{{ name }}'));
+                chart.draw(data, options); 
+            {% endfor %}
+        }
+    </script>
 </head>
 
 <body>
-    <table>
-        {% for k, v in top_liked_tweets_dict.items() %}
-        <tr>
-            <td>key: {{ k }}</td>
-            {% for k2, v2 in v.items() %}
-            <tr>
-                <td>{{ k2 }}</td>
-                <td>{{ v2 }}</td>
-            </tr>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+    <h1 class="title">Top 10% of tweets category</h1> 
+    {% for name in top_liked_tweets_dict.keys() %}
+        <span class=chart_div>
+            <span id="chart_div_{{ name }}"></span>
+            <p>Most Engaged tweet by {{ name }} is: <span class="bold">{{ highest_tweet_type[name] }}</span></p>
+        </span>
+    {% endfor %}
+    <p class="footer">About: These pie charts show the types of tweets that are top 10% of most engaged tweets (Like + Retweets)</p>
 </body>
 
 </html>
