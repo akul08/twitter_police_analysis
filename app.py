@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 tweet_users = ['DelhiPolice', 'MumbaiPolice',
-               'wbpolice', 'ghaziabadpolice', 'ThaneCityPolice']
+               'wbpolice', 'hydcitypolice', 'ThaneCityPolice']
 
 
 @app.route('/')
@@ -76,7 +76,7 @@ def most_engagement():
         collection = db[police_handle]
 
         print police_handle
-        top_liked_tweets = defaultdict(int)
+        top_liked_tweets = {'image_text': 0, 'image': 0, 'text': 0}
         tweets = list(collection.find())
         tw = sorted(
             tweets, key=lambda x: x['like'] + x['retweets'], reverse=True)

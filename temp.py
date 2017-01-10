@@ -3,7 +3,7 @@ import datetime
 from collections import defaultdict, Counter
 
 tweet_users = ['DelhiPolice', 'MumbaiPolice',
-               'wbpolice', 'ghaziabadpolice', 'ThaneCityPolice']
+               'wbpolice', 'hydcitypolice', 'ThaneCityPolice']
 
 police_handle = 'DelhiPolice'
 

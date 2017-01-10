@@ -1,21 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Most used</title>
-</head>
-<body>
-    <table>
-        {% for k, v in most_used_hashtags_dict.items() %}
-        <tr>
-            <td>key: {{ k }}</td>
-            {% for k2 in v %}
-            <tr>
-                <td>{{ k2 }}</td>
-            </tr>
-            {% endfor %}
-        </tr>
+    <head>
+        <meta charset="UTF-8">
+        <title>Most used</title>
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+            .badge {
+                float: right;
+            }
+            .badge {
+                display: inline-block;
+                min-width: 10px;
+                padding: 3px 7px;
+                font-size: 12px;
+                font-weight: 700;
+                line-height: 1;
+                color: #fff;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: baseline;
+                background-color: #777;
+                border-radius: 10px;
+                margin-left: 5px;
+            }
+            .tables {
+                width: 100%;
+            }
+            table {
+                display: inline-table;
+                text-align: center;
+                margin: 10px 60px;
+            }
+            table, th, td {
+                border: 1px solid #ddd;
+                border-collapse: collapse;
+                width: 22%;
+                min-width: 250px;
+            }
+            th, td {
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="tables">
+        {% for name in most_used_hashtags_dict.keys() %}
+            <table>
+                <tr>
+                    <th>{{ name }}</th>
+                </tr>
+                {% for hashtags, times in most_used_hashtags_dict[name] %}
+                    <tr>
+                        <td>{{ hashtags }} <span class="badge">{{ times }}</span></td>
+                    </tr>
+                {% endfor %}        
+            </table>
         {% endfor %}
-    </table>
-</body>
+        </div>
+    </body>
 </html>

@@ -6,7 +6,7 @@ from pymongo import MongoClient
 
 
 tweet_users = ['DelhiPolice', 'MumbaiPolice',
-               'wbpolice', 'ghaziabadpolice', 'ThaneCityPolice']
+               'wbpolice', 'hydcitypolice', 'ThaneCityPolice']
 
 
 def timeit(func):
