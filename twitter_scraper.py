@@ -56,7 +56,7 @@ def scraper(police_handle):
 
     # Connecting to MongoDB and collection
     client = MongoClient('localhost', 27017)
-    db = client['twitter_policeDB']
+    db = client['twitter_police_db']
     collection = db[police_handle]
 
     # Collect only the first 350 tweets

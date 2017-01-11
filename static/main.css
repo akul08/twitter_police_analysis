@@ -15,7 +15,7 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
-    margin-top: -140px;
+    margin-top: -160px;
     z-index: -1;
     background: #00c6ff;
     /* fallback for old browsers */
@@ -38,17 +38,18 @@ body {
 }
 
 .navbar-title {
-    margin: 21px;
+    margin: 21px 0 0 0;
     color: #393939;
 }
+
 .navbar-nav {
     background: #eee;
-    height: 140px;
+    height: 160px;
     text-align: center;
     margin-top: 0;
 }
 
-.navbar-nav a {
+.navbar-nav .icon-hover {
     background: #ddd;
     margin: 20px 20px 0 20px;
     padding: 11px;
@@ -56,11 +57,17 @@ body {
     display: inline-block;
 }
 
-.navbar-nav a:hover {
+.navbar-nav .icon-hover:hover {
     background: #ccc;
     transform: translateY(-3px);
     transition: all .4s;
     color: #1DA1F2;
+}
+
+.built-by {
+    font-size: 11px;
+    font-family: 'Roboto Mono', monospace;
+    margin: 8px;
 }
 
 .icon-hover:hover i {

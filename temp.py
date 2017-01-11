@@ -11,7 +11,7 @@ police_handle = 'DelhiPolice'
 # for police_handle in tweet_users:
 
 #     client = MongoClient('localhost', 27017)
-#     db = client['twitter_policeDB']
+#     db = client['twitter_police_db']
 #     collection = db[police_handle]
 
 #     week = defaultdict(int)
@@ -32,7 +32,7 @@ police_handle = 'DelhiPolice'
 # print avg_tweets
 
 client = MongoClient('localhost', 27017)
-db = client['twitter_policeDB']
+db = client['twitter_police_db']
 collection = db[police_handle]
 
 
@@ -40,7 +40,7 @@ collection = db[police_handle]
 # for police_handle in tweet_users:
 
 #     client = MongoClient('localhost', 27017)
-#     db = client['twitter_policeDB']
+#     db = client['twitter_police_db']
 #     collection = db[police_handle]
 
 #     hashtags_list = []
@@ -60,7 +60,7 @@ top_liked_tweets_dict = {}
 for police_handle in tweet_users:
 
     client = MongoClient('localhost', 27017)
-    db = client['twitter_policeDB']
+    db = client['twitter_police_db']
     collection = db[police_handle]
 
     print police_handle

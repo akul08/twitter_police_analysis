@@ -57,7 +57,7 @@ def get_tweets(screen_name):
     tweets = [tweet._json for tweet in tweets]
     # To connect and insert in MongoDB.
     client = MongoClient('localhost', 27017)
-    db = client['twitter_policeDB']
+    db = client['twitter_police_db']
     collection = db[screen_name]
     collection.insert_many(tweets)
 

@@ -9,6 +9,8 @@ app = Flask(__name__)
 tweet_users = ['DelhiPolice', 'MumbaiPolice',
                'wbpolice', 'hydcitypolice', 'ThaneCityPolice']
 
+url = os.getenv('MONGOLAB_URI', 'mongodb://localhost:27017')
+
 
 @app.route('/')
 def welcome():
@@ -18,10 +20,11 @@ def welcome():
 @app.route('/frequency')
 def frequency_of_tweets_in_week():
     avg_tweets = {}
+    client = MongoClient(url)
+    db = client['twitter_police_db']
+
     for police_handle in tweet_users:
 
-        client = MongoClient('localhost', 27017)
-        db = client['twitter_policeDB']
         collection = db[police_handle]
 
         week = defaultdict(int)
@@ -46,10 +49,11 @@ def frequency_of_tweets_in_week():
 def most_used_hashtags():
 
     most_used_hashtags_dict = {}
+    client = MongoClient(url)
+    db = client['twitter_police_db']
+
     for police_handle in tweet_users:
 
-        client = MongoClient('localhost', 27017)
-        db = client['twitter_policeDB']
         collection = db[police_handle]
 
         hashtags_list = []
@@ -69,10 +73,11 @@ def most_used_hashtags():
 def most_engagement():
     top_liked_tweets_dict = {}
     highest_tweet_type = {}
+    client = MongoClient(url)
+    db = client['twitter_police_db']
+
     for police_handle in tweet_users:
 
-        client = MongoClient('localhost', 27017)
-        db = client['twitter_policeDB']
         collection = db[police_handle]
 
         print police_handle
@@ -108,5 +113,6 @@ def most_engagement():
 # in production Heroku will set the PORT environment variable.
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
+    print url
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
