@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>App</title>
-</head>
-<body>
-	<h1>Welcome to App</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+	Welcome to Twitter Analyser
+{% endblock %}
+{% block body %}
+<div class="background-blue"></div>
+	<div class="bird-image"><img src="{{ url_for('static', filename='twitter-police-bird.png') }}"></div>
+{% endblock %}

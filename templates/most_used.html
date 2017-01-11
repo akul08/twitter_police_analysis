@@ -1,75 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Most used</title>
-        <style>
-            html, body {
-                width: 100%;
-                height: 100%;
-            }
-            .title {
-                text-align: center;
-            }
-            .badge {
-                float: right;
-            }
-            .badge {
-                display: inline-block;
-                min-width: 10px;
-                padding: 3px 7px;
-                font-size: 12px;
-                font-weight: 700;
-                line-height: 1;
-                color: #fff;
-                text-align: center;
-                white-space: nowrap;
-                vertical-align: baseline;
-                background-color: #777;
-                border-radius: 10px;
-                margin-left: 5px;
-            }
-            .tables {
-                width: 100%;
-            }
-            table {
-                display: inline-table;
-                text-align: center;
-                margin: 10px 60px;
-            }
-            table, th, td {
-                border: 1px solid #ddd;
-                border-collapse: collapse;
-                width: 22%;
-                min-width: 250px;
-            }
-            th, td {
-                padding: 10px;
-            }
-            .footer {
-                text-align: center;
-                font-size: 14px;
-                margin-top: 30px;
-                margin-bottom: 30px;                
-            }
-        </style>
-    </head>
-    <body>
-        <h1 class="title">Top 10 #hashtags</h1>
-        <div class="tables">
-        {% for name in most_used_hashtags_dict.keys() %}
-            <table>
+{% extends 'base.html' %}
+{% block title %}
+    Top 10 #hashtags
+{% endblock%}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='most_used.css') }}">
+{% endblock%}
+{% block body %}
+    <h1 class="title">Top 10 #hashtags</h1>
+    <div class="tables">
+    {% for name in most_used_hashtags_dict.keys() %}
+        <table>
+            <tr>
+                <th><span class="blue-bird"><i class="fa fa-twitter" aria-hidden="true"></i></span> {{ name }}</th>
+            </tr>
+            {% for hashtags, times in most_used_hashtags_dict[name] %}
                 <tr>
-                    <th>{{ name }}</th>
+                    <td>{{ hashtags }} <span class="badge">{{ times }}</span></td>
                 </tr>
-                {% for hashtags, times in most_used_hashtags_dict[name] %}
-                    <tr>
-                        <td>{{ hashtags }} <span class="badge">{{ times }}</span></td>
-                    </tr>
-                {% endfor %}        
-            </table>
-        {% endfor %}
-        </div>
-        <p class="footer">About: These table's consist of the top 10 hashtags in descending order made by twitter users.</p>
-    </body>
-</html>
+            {% endfor %}        
+        </table>
+    {% endfor %}
+    </div>
+    <p class="footer">About: These table's consist of the top 10 hashtags in descending order made by twitter users.</p>
+{% endblock%}

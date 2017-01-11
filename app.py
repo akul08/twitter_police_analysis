@@ -11,7 +11,7 @@ tweet_users = ['DelhiPolice', 'MumbaiPolice',
 
 
 @app.route('/')
-def hello_world():
+def welcome():
     return render_template('index.html')
 
 

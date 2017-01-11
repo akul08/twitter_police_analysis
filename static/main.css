@@ -1,0 +1,83 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.background-blue {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin-top: -140px;
+    z-index: -1;
+    background: #00c6ff;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #00c6ff, #0072ff);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #00c6ff, #0072ff);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    opacity: 0.7;
+}
+
+.bird-image {
+    width: 23%;
+    margin: auto;
+    margin-top: 60px;
+}
+
+.bird-image img {
+    width: 100%;
+    padding: 15px 0;
+}
+
+.navbar-title {
+    margin: 21px;
+    color: #393939;
+}
+.navbar-nav {
+    background: #eee;
+    height: 140px;
+    text-align: center;
+    margin-top: 0;
+}
+
+.navbar-nav a {
+    background: #ddd;
+    margin: 20px 20px 0 20px;
+    padding: 11px;
+    color: #696969;
+    display: inline-block;
+}
+
+.navbar-nav a:hover {
+    background: #ccc;
+    transform: translateY(-3px);
+    transition: all .4s;
+    color: #1DA1F2;
+}
+
+.icon-hover:hover i {
+    color: #1DA1F2;
+}
+
+.blue-bird {
+    color: #1DA1F2;
+}
+
+.title {
+    text-align: center;
+}
+
+.footer {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

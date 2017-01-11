@@ -1,0 +1,9 @@
+.chart_div {
+    width: 33%; 
+    display: inline-block;
+}
+.chart_div p {
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+}
