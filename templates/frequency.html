@@ -1,29 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Frequency of each day</title>
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                overflow-x: hidden;
+            }
+            .title {
+                text-align: center;
+            }
+            .graphs {
+                width: 46%;
+                display: inline-block;
+                border: 1px solid #ddd;
+                border-collapse: collapse;
+                border-radius: 5px;
+                margin: 10px 10px;
+                min-width: 620px;
+            }
+            .footer {
+                text-align: center;
+                font-size: 14px;
+                margin-top: 30px;
+                margin-bottom: 30px;                
 
-<head>
-    <meta charset="UTF-8">
-    <title>Frequency of each day</title>
-</head>
+            }
+        </style>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script>
+            google.charts.load('current', {packages: ['corechart', 'bar']});
+            google.charts.setOnLoadCallback(drawBasic);
 
-<body>
-    <table>
-<!--         {% for k, v in avg_tweets.items() %}
-			
+            function drawBasic() {
+                  {% for name in avg_tweets.keys() %}
+
+                      var data = new google.visualization.DataTable();
+                      data.addColumn('string', 'Days');
+                      data.addColumn('number', 'Tweets');
+
+                      data.addRows([
+                        ['Monday', {{ avg_tweets[name]['Monday'] }}],
+                        ['Tuesday', {{ avg_tweets[name]['Tuesday'] }}],
+                        ['Wednesday', {{ avg_tweets[name]['Wednesday'] }}],
+                        ['Thursday', {{ avg_tweets[name]['Thursday'] }}],
+                        ['Friday', {{ avg_tweets[name]['Friday'] }}],
+                        ['Saturday', {{ avg_tweets[name]['Saturday'] }}],
+                        ['Sunday', {{ avg_tweets[name]['Sunday'] }}]
+                      ]);
+
+                      var options = {
+                        title: 'Frequency of tweets on a day',
+                        hAxis: {
+                          title: 'Days',
+                        },
+                        vAxis: {
+                          title: 'Frequency'
+                        },
+                        height: 250,
+
+                      };
+
+                      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_{{ name }}'));
+
+                      chart.draw(data, options);
+                {% endfor %}
+                }
+        </script>      
+    </head>
+    <body>
+        <h1 class="title">Frequency of tweets made on a day of week</h1>
+        {% for name in avg_tweets.keys() %}
+            <div class="graphs">
+                <h3 class="title">{{ name }}</h3>
+                <div id="chart_div_{{ name }}"></div>
+            </div>
         {% endfor %}
- -->
-        {% for k, v in avg_tweets.items() %}
-        <tr>
-            <td>key: {{ k }}</td>
-            {% for k2, v2 in v.items() %}
-            <tr>
-                <td>{{ k2 }}</td>
-                <td>{{ v2 }}</td>
-            </tr>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
-</body>
-
+        <p class="footer">About: These bar charts represents how many tweets were made on which day.</p>
+    </body>
 </html>
