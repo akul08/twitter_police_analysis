@@ -23,8 +23,8 @@
         {% for name, tweets in top_liked_tweets_dict.items() %}
             // Create the data table.
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Topping');
-            data.addColumn('number', 'Slices');
+            data.addColumn('string', 'Tweets');
+            data.addColumn('number', 'Count');
             data.addRows([
                 {% for type_of_tweet,no_of_tweet in tweets.items() %}
                     ['{{ type_of_tweet }}', {{no_of_tweet}}], 

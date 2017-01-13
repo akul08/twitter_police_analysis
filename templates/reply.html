@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+    Reply on Tweets
+{% endblock%}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='most_used.css') }}">
+{% endblock%}
+{% block body %}
+    <h1 class="title"><i class="fa fa-reply" aria-hidden="true"></i> on Tweets</h1>
+    <div class="tables">
+    {% for name in reply_dict.keys() %}
+        <table>
+            <tr>
+                <th><span class="blue-bird"><i class="fa fa-twitter" aria-hidden="true"></i></span> {{ name }}</th>
+            </tr>
+            {% for reply in ('500', '300', '100', '50', '20', '10', '0') %}
+                <tr>
+                    <td>No. of tweets with +{{ reply }} <i class="fa fa-reply green" aria-hidden="true"></i><span class="badge">{{ reply_dict[name][reply] }}</span></td>
+                </tr>
+            {% endfor %}        
+        </table>
+    {% endfor %}
+    </div>
+    <p class="footer">About: These table's consist the no. of Replies on tweets.</p>
+{% endblock%}

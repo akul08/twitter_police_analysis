@@ -56,36 +56,63 @@ collection = db[police_handle]
 #     most_used_hashtags_dict[police_handle] = top_ten_hashtags
 
 # print most_used_hashtags_dict
-top_liked_tweets_dict = {}
+# top_liked_tweets_dict = {}
+
+
+# for police_handle in tweet_users:
+
+#     client = MongoClient('localhost', 27017)
+#     db = client['twitter_police_db']
+#     collection = db[police_handle]
+
+#     print police_handle
+#     top_liked_tweets = defaultdict(int)
+#     tweets = list(collection.find())
+#     tw = sorted(tweets, key=lambda x: x['like'] + x['retweets'], reverse=True)
+
+#     for i in tw[:len(tw) / 10]:
+#         # print i['data-tweet-id'], i['like'], i['retweets']
+#         if i['media']:
+#             if i['content']:
+#                 top_liked_tweets['image_text'] += 1
+#             else:
+#                 top_liked_tweets['image'] += 1
+#         else:
+#             top_liked_tweets['text'] += 1
+
+#     if tw[0]['media']:
+#         if tw[0]['content']:
+#             top_liked_tweets['highest_tweet_type'] = 'image_text'
+#         else:
+#             top_liked_tweets['highest_tweet_type'] = 'image'
+#     else:
+#         top_liked_tweets['highest_tweet_type'] = 'text'
+
+#     top_liked_tweets_dict[police_handle] = top_liked_tweets
+
+# print top_liked_tweets_dict
+
+from textblob import TextBlob
+sentiment_dict = {}
 for police_handle in tweet_users:
 
     client = MongoClient('localhost', 27017)
     db = client['twitter_police_db']
     collection = db[police_handle]
 
-    print police_handle
-    top_liked_tweets = defaultdict(int)
-    tweets = list(collection.find())
-    tw = sorted(tweets, key=lambda x: x['like'] + x['retweets'], reverse=True)
+    sent = defaultdict(float)
+    sent['polarity'] = []
+    for i in collection.find({'lang': 'en'}):
+        tweet = TextBlob(i['content'])
 
-    for i in tw[:len(tw) / 10]:
-        # print i['data-tweet-id'], i['like'], i['retweets']
-        if i['media']:
-            if i['content']:
-                top_liked_tweets['image_text'] += 1
-            else:
-                top_liked_tweets['image'] += 1
+        if tweet.sentiment.polarity < 0:
+            sent["negative"] += 1
+        elif tweet.sentiment.polarity == 0:
+            sent["neutral"] += 1
         else:
-            top_liked_tweets['text'] += 1
+            sent["positive"] += 1
+        sent['polarity'].append(tweet.sentiment.polarity)
 
-    if tw[0]['media']:
-        if tw[0]['content']:
-            top_liked_tweets['highest_tweet_type'] = 'image_text'
-        else:
-            top_liked_tweets['highest_tweet_type'] = 'image'
-    else:
-        top_liked_tweets['highest_tweet_type'] = 'text'
-
-    top_liked_tweets_dict[police_handle] = top_liked_tweets
-
-print top_liked_tweets_dict
+    sent['avg_polarity'] = sum(sent['polarity'])/(sent['positive'] + sent['negative'] + sent['neutral']) 
+    sentiment_dict[police_handle] = sent
+print sentiment_dict

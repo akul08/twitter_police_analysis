@@ -11,6 +11,14 @@ body {
     font-weight: bold;
 }
 
+.underline {
+    text-decoration: underline;
+}
+
+#random-color {
+    font-size: 40px;
+}
+
 .background-blue {
     width: 100%;
     height: 100%;
@@ -35,6 +43,18 @@ body {
 .bird-image img {
     width: 100%;
     padding: 15px 0;
+}
+
+.red {
+    color: red;
+}
+
+.purple {
+    color: #a600be;
+}
+
+.green {
+    color: #00a000;
 }
 
 .navbar-title {

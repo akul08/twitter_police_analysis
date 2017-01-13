@@ -1,8 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}
-	Welcome to Twitter Analyser
+    Welcome to Twitter Analyser
 {% endblock %}
 {% block body %}
 <div class="background-blue"></div>
-	<div class="bird-image"><img src="{{ url_for('static', filename='twitter-police-bird.png') }}"></div>
+    <div class="bird-image"><img src="{{ url_for('static', filename='images/twitter-police-bird.png') }}"></div>
+    <h1 id="random-color" class="title">
+        <img src="{{ url_for('static', filename='images/parrotcop.gif') }}">
+        Did someone call for Police.
+        <img src="{{ url_for('static', filename='images/parrotcop.gif') }}">
+    </h1>
+    <script>
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        setInterval(function () {
+            document.getElementById('random-color').style.color = getRandomColor();
+            console.log('klk');
+        }, 150);
+    </script>
 {% endblock %}
