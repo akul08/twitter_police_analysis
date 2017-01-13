@@ -31,7 +31,6 @@ def frequency_of_tweets_in_week():
         week = defaultdict(int)
 
         for i in collection.find({}):
-            # print i['timestamp']
             try:
                 day = datetime.datetime.strptime(
                     i['timestamp'], '%d %b %Y').strftime('%A')
@@ -60,10 +59,8 @@ def most_used_hashtags():
         hashtags_list = []
         for i in collection.find({}):
             hashtags_list.extend(i['hashtags'])
-        print len(hashtags_list)
 
         top_ten_hashtags = Counter(hashtags_list).most_common(10)
-        # print top_ten_hashtags
         most_used_hashtags_dict[police_handle] = top_ten_hashtags
 
     return render_template('most_used.html',
@@ -81,7 +78,6 @@ def most_engagement():
 
         collection = db[police_handle]
 
-        print police_handle
         top_liked_tweets = {'image_text': 0, 'image': 0, 'text': 0}
         tweets = list(collection.find())
         tw = sorted(
@@ -238,6 +234,5 @@ def reply_on_tweets():
 # in production Heroku will set the PORT environment variable.
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
-    print url
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=False)

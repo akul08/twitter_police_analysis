@@ -1,5 +1,6 @@
 .chart_div {
     width: 33%; 
+    min-width: 400px;
     display: inline-block;
 }
 .chart_div p {

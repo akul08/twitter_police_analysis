@@ -7,3 +7,9 @@
     margin: 10px 10px;
     min-width: 520px;
 }
+
+@media only screen and (max-width: 990px) {
+	.graphs {
+		width: 95%;
+	}
+}
