@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}
+    Types of Tweets
+{% endblock%}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='most_engagement.css') }}">
+{% endblock %}
+{% block script %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>    
+<script>
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+        {% for name, tweets in liked_tweets_dict.items() %}
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Tweets');
+            data.addColumn('number', 'Count');
+            data.addRows([
+                {% for type_of_tweet,no_of_tweet in tweets.items() %}
+                    ['{{ type_of_tweet }}', {{no_of_tweet}}], 
+                {% endfor %}
+            ]);
+
+            // Set chart options
+            var options = {
+                'title': '{{ name }}',
+                'is3D': true,
+                'legend': 'bottom',
+                'width': 400,
+                'height': 250
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div_' + '{{ name }}'));
+            chart.draw(data, options); 
+        {% endfor %}
+    }
+</script>
+{% endblock %}
+{% block body %}    
+    <h1 class="title">Tweets category</h1> 
+    {% for name in liked_tweets_dict.keys() %}
+        <span class=chart_div>
+            <span id="chart_div_{{ name }}"></span>
+        </span>
+    {% endfor %}
+    <p class="footer">About: These pie charts show the types of tweets made by different police accounts.</p>
+{% endblock %}

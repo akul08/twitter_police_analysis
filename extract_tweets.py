@@ -17,7 +17,7 @@ ACCESS_TOKEN_SECRET = credentials['accesstokensecret']
 
 
 tweet_users = ['DelhiPolice', 'MumbaiPolice',
-               'Uppolice', 'wbpolice', 'BlrCityPolice']
+               'wbpolice', 'hydcitypolice', 'ThaneCityPolice']
 
 
 def get_tweets(screen_name):
@@ -28,7 +28,7 @@ def get_tweets(screen_name):
         auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
         api = tweepy.API(auth)
-
+        # Authorize app
         t = api.user_timeline(
             screen_name=screen_name, count=200, include_rts=False, exclude_replies=True)
 
@@ -62,6 +62,6 @@ def get_tweets(screen_name):
     collection.insert_many(tweets)
 
 
-# for police_user in tweet_users:
-    # get_tweets(police_user)
-get_tweets('DelhiPolice')
+for police_user in tweet_users:
+    get_tweets(police_user)
+# get_tweets('DelhiPolice')
