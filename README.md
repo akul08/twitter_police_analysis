@@ -1,12 +1,8 @@
 # Task A solution for PrecogSummer2017
 
-### Problem: 
+### Problem: Collect tweets (not retweets/replies) of 5 verified Indian police accounts, and do Data Analysis, Data Visualization and Sentiment Analysis and show the results and graphs in a web app.
 
-#### Collect tweets (not retweets/replies) of 5 verified Indian police accounts, and do Data Analysis, Data Visualization and Sentiment Analysis and show the results and graphs in a web app.
-
-### Solution: 
-
-#### Web App = Flask + Heroku + MongoDB/MongoLab + Selenium + Google Charts.
+### Solution: Web App = Flask + Heroku + MongoDB/MongoLab + Selenium + Google Charts.
 
 ### Link to Web App: [https://akul-precog.herokuapp.com/](https://akul-precog.herokuapp.com/)
 
@@ -30,13 +26,13 @@
 
 - Create a **Flask web app** for data Visualization and analysis, to run web app: `python app.py`
 
-- Create various `routes and templates` for specific functions and data analysis.
+- Create various **routes and templates** for specific functions and data analysis.
 
-- Sentiment Analysis done using python library: `TextBlob`
+- Sentiment Analysis done using python library: **TextBlob**
 
-- Stylize the Templates by css from `static`
+- Stylize the Templates by css from **static**
 
-- Data Visualization done with the help of `Google charts` and the data query done from `MongoDB`.
+- Data Visualization done with the help of **Google charts** and the data query done from **MongoDB**.
 
 #### Step 3: Create DB backup.
 
